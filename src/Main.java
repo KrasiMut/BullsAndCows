@@ -11,6 +11,23 @@ public class Main {
         return true;
     }
 
+    public static String generateSecretNumber(byte digitsCount) {
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        boolean[] usedDigits = new boolean[10];
+        byte count = 0;
+
+        while (count < digitsCount) {
+            int digit = random.nextInt(10);
+            if (!usedDigits[digit]) {
+                sb.append(digit);
+                usedDigits[digit] = true;
+                count++;
+            }
+        }
+
+        return sb.toString();
+    }
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
 
