@@ -2,6 +2,20 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+    public static String getValidGuess(byte digitsCount, Scanner scanner) {
+        String guess;
+        while (true) {
+            guess = scanner.nextLine();
+            if (guess.length() != digitsCount) {
+                System.out.println("Invalid guess length. Please enter a " + digitsCount + "-digit number.");
+            } else if (!isUniqueDigits(guess)) {
+                System.out.println("Invalid guess. Digits should be unique.");
+            } else {
+                break;
+            }
+        }
+        return guess;
+    }
     public static boolean isUniqueDigits(String number) {
         for (byte i = 0; i < number.length() - 1; i++) {
             if (number.substring(i + 1).contains(String.valueOf(number.charAt(i)))) {
