@@ -42,6 +42,25 @@ public class Main {
 
         return sb.toString();
     }
+
+    public static byte[] getBullsAndCows(String guess, String number) {
+        byte bulls = 0;
+        byte cows = 0;
+
+        for (byte i = 0; i < number.length(); i++) {
+            char guessDigit = guess.charAt(i);
+            char numberDigit = number.charAt(i);
+
+            if (guessDigit == numberDigit) {
+                bulls++;
+            } else if (number.contains(String.valueOf(guessDigit))) {
+                cows++;
+            }
+        }
+
+        return new byte[]{bulls, cows};
+    }
+
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
 
