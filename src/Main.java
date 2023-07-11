@@ -2,6 +2,25 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+    public static void playSinglePlayerGame(Scanner scanner) {
+        byte digitsCount = 4;
+        String secretNumber = generateSecretNumber(digitsCount);
+
+        System.out.println("Computer has selected a secret number.");
+
+        while (true) {
+            System.out.println("Player, it's your turn to guess:");
+
+            String guess = getValidGuess(digitsCount, scanner);
+            byte[] result = getBullsAndCows(guess, secretNumber);
+            System.out.println("Bulls: " + result[0] + ", Cows: " + result[1]);
+
+            if (result[0] == digitsCount) {
+                System.out.println("Congratulations, Player! You guessed the secret number!");
+                break;
+            }
+        }
+    }
     public static String getValidGuess(byte digitsCount, Scanner scanner) {
         String guess;
         while (true) {
