@@ -21,6 +21,39 @@ public class Main {
             }
         }
     }
+
+    public static void playTwoPlayerGame(Scanner scanner) {
+        byte digitsCount = 4;
+        String secretNumberPlayer1 = generateSecretNumber(digitsCount);
+        String secretNumberPlayer2 = generateSecretNumber(digitsCount);
+
+        String guess1;
+        String guess2;
+
+        while (true) {
+            System.out.println("Player 1, it's your turn to guess:");
+
+            guess1 = getValidGuess(digitsCount, scanner);
+            byte[] result1 = getBullsAndCows(guess1, secretNumberPlayer2);
+            System.out.println("Bulls: " + result1[0] + ", Cows: " + result1[1]);
+
+            if (result1[0] == digitsCount) {
+                System.out.println("Congratulations, Player 1! You guessed the secret number!");
+                break;
+            }
+
+            System.out.println("Player 2, it's your turn to guess:");
+
+            guess2 = getValidGuess(digitsCount, scanner);
+            byte[] result2 = getBullsAndCows(guess2, secretNumberPlayer1);
+            System.out.println("Bulls: " + result2[0] + ", Cows: " + result2[1]);
+
+            if (result2[0] == digitsCount) {
+                System.out.println("Congratulations, Player 2! You guessed the secret number!");
+                break;
+            }
+        }
+    }
     public static String getValidGuess(byte digitsCount, Scanner scanner) {
         String guess;
         while (true) {
