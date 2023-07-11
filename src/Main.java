@@ -120,5 +120,30 @@ public class Main {
         System.out.println("Choose a game mode:");
         System.out.println("1. Single Player");
         System.out.println("2. Two Players");
+
+        byte gameMode;
+        while (true) {
+            if (scn.hasNextByte()) {
+                gameMode = scn.nextByte();
+                if (gameMode == 1 || gameMode == 2) {
+                    break;
+                } else {
+                    System.out.println("Invalid game mode. Please choose 1 or 2.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a number.");
+                scn.nextLine();
+            }
+        }
+
+        scn.nextLine();
+
+        if (gameMode == 1) {
+            playSinglePlayerGame(scn);
+        } else if (gameMode == 2) {
+            playTwoPlayerGame(scn);
+        }
+
+        scn.close();
     }
 }
