@@ -103,7 +103,9 @@ public class Main {
             guess = scanner.nextLine();
             if (guess.length() != digitsCount) {
                 System.out.println("Invalid guess length. Please enter a " + digitsCount + "-digit number.");
-            } else if (!isUniqueDigits(guess)) {
+            } else if (!guess.matches("[0-9]+")) {
+            System.out.println("Invalid guess. Please enter only digits.");
+            }else if (!isUniqueDigits(guess)) {
                 System.out.println("Invalid guess. Digits should be unique.");
             } else {
                 break;
