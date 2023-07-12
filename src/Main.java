@@ -10,6 +10,7 @@ public class Main {
         List<String> history = new ArrayList<>();
 
         System.out.println("Computer has selected a secret number.");
+        System.out.println("Secret number: " + secretNumber); //for testing purposes only
 
         System.out.println("Player, please enter your name:");
         String playerName = scanner.nextLine();
@@ -41,6 +42,8 @@ public class Main {
         byte digitsCount = 4;
         String secretNumberPlayer1 = generateSecretNumber(digitsCount);
         String secretNumberPlayer2 = generateSecretNumber(digitsCount);
+        System.out.println("Secret Number of Player 1: " + secretNumberPlayer1);   // For testing
+        System.out.println("Secret Number of Player 2: " + secretNumberPlayer2);  // purposes only!
 
         List<String> historyPlayer1 = new ArrayList<>();
         List<String> historyPlayer2 = new ArrayList<>();
