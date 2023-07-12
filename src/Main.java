@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -5,20 +7,33 @@ public class Main {
     public static void playSinglePlayerGame(Scanner scanner) {
         byte digitsCount = 4;
         String secretNumber = generateSecretNumber(digitsCount);
+        List<String> history = new ArrayList<>();
 
         System.out.println("Computer has selected a secret number.");
 
+        System.out.println("Player, please enter your name:");
+        String playerName = scanner.nextLine();
+
         while (true) {
-            System.out.println("Player, it's your turn to guess:");
+            System.out.println("--------------------------------------");
+            System.out.println(playerName + ", it's your turn to guess:");
+            System.out.println("Your history: " + String.join(", ", history));
 
             String guess = getValidGuess(digitsCount, scanner);
             byte[] result = getBullsAndCows(guess, secretNumber);
-            System.out.println("Bulls: " + result[0] + ", Cows: " + result[1]);
+            System.out.println("Bulls: " + result[0] + ", Cows: " + result[1] + "\n" + "--------------------------------------");
+
+            history.add(guess + "(B" + result[0] + "|" + "C" + result[1] + ")");
 
             if (result[0] == digitsCount) {
-                System.out.println("Congratulations, Player! You guessed the secret number!");
+                System.out.println("******************************\n    CONGRATULATIONS, " + playerName + "!" +  "\n******************************");
                 break;
             }
+        }
+
+        System.out.println("Game history:");
+        for (String guess : history) {
+            System.out.println(guess + ", ");
         }
     }
 
@@ -27,33 +42,58 @@ public class Main {
         String secretNumberPlayer1 = generateSecretNumber(digitsCount);
         String secretNumberPlayer2 = generateSecretNumber(digitsCount);
 
-        String guess1;
-        String guess2;
+        List<String> historyPlayer1 = new ArrayList<>();
+        List<String> historyPlayer2 = new ArrayList<>();
+
+        System.out.println("Player 1, please enter your name:");
+        String player1Name = scanner.nextLine();
+
+        System.out.println("Player 2, please enter your name:");
+        String player2Name = scanner.nextLine();
 
         while (true) {
-            System.out.println("Player 1, it's your turn to guess:");
+            System.out.println("--------------------------------------");
+            System.out.println(player1Name + ", it's your turn to guess:");
+            System.out.println("History of " + player1Name + ": " + String.join(", ", historyPlayer1));
 
-            guess1 = getValidGuess(digitsCount, scanner);
-            byte[] result1 = getBullsAndCows(guess1, secretNumberPlayer2);
-            System.out.println("Bulls: " + result1[0] + ", Cows: " + result1[1]);
+            String guess1 = getValidGuess(digitsCount, scanner);
+            byte[] result1 = getBullsAndCows(guess1, secretNumberPlayer1);
+            System.out.println("Bulls: " + result1[0] + ", Cows: " + result1[1] + "\n" + "--------------------------------------");
+
+            historyPlayer1.add(guess1 + "(B" + result1[0] + "|" + "C" + result1[1] + ")");
 
             if (result1[0] == digitsCount) {
-                System.out.println("Congratulations, Player 1! You guessed the secret number!");
+                System.out.println("******************************\n    CONGRATULATIONS, " + player1Name + "!" + "\n******************************");
                 break;
             }
 
-            System.out.println("Player 2, it's your turn to guess:");
+            System.out.println(player2Name + ", it's your turn to guess:");
+            System.out.println("History of " + player2Name + ": " + String.join(", ", historyPlayer2));
 
-            guess2 = getValidGuess(digitsCount, scanner);
-            byte[] result2 = getBullsAndCows(guess2, secretNumberPlayer1);
-            System.out.println("Bulls: " + result2[0] + ", Cows: " + result2[1]);
+            String guess2 = getValidGuess(digitsCount, scanner);
+            byte[] result2 = getBullsAndCows(guess2, secretNumberPlayer2);
+            System.out.println("Bulls: " + result2[0] + ", Cows: " + result2[1] + "\n" + "--------------------------------------");
+
+            historyPlayer2.add(guess2 + "(B" + result2[0] + "|" + "C" + result2[1] + ")");
 
             if (result2[0] == digitsCount) {
-                System.out.println("Congratulations, Player 2! You guessed the secret number!");
+                System.out.println("******************************\n    CONGRATULATIONS, " + player2Name + "!" + "\n******************************");
                 break;
             }
         }
+
+        System.out.println("Game history:");
+        System.out.println(player1Name + ":");
+        for (String guess : historyPlayer1) {
+            System.out.print(guess + ", ");
+        }
+        System.out.println();
+        System.out.println(player2Name + ":");
+        for (String guess : historyPlayer2) {
+            System.out.print(guess + ", ");
+        }
     }
+
     public static String getValidGuess(byte digitsCount, Scanner scanner) {
         String guess;
         while (true) {
@@ -68,6 +108,7 @@ public class Main {
         }
         return guess;
     }
+
     public static boolean isUniqueDigits(String number) {
         for (byte i = 0; i < number.length() - 1; i++) {
             if (number.substring(i + 1).contains(String.valueOf(number.charAt(i)))) {
@@ -137,13 +178,16 @@ public class Main {
         }
 
         scn.nextLine();
+        System.out.println("--------------------------------------");
 
         if (gameMode == 1) {
             playSinglePlayerGame(scn);
-        } else if (gameMode == 2) {
+        } else {
             playTwoPlayerGame(scn);
         }
 
         scn.close();
     }
 }
+
+
