@@ -129,6 +129,11 @@ public class Main {
         boolean[] usedDigits = new boolean[10];
         byte count = 0;
 
+        int firstDigit = random.nextInt(9) + 1;
+        sb.append(firstDigit);
+        usedDigits[firstDigit] = true;
+        count++;
+
         while (count < digitsCount) {
             int digit = random.nextInt(10);
             if (!usedDigits[digit]) {
