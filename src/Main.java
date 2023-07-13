@@ -86,14 +86,14 @@ public class Main {
         }
 
         System.out.println("Game history:");
-        System.out.println(player1Name + ":");
+        System.out.print(player1Name + ": ");
         for (String guess : historyPlayer1) {
-            System.out.print(guess + ", ");
+            System.out.print(guess + "; ");
         }
         System.out.println();
-        System.out.println(player2Name + ":");
+        System.out.print(player2Name + ": ");
         for (String guess : historyPlayer2) {
-            System.out.print(guess + ", ");
+            System.out.print(guess + "; ");
         }
     }
 
